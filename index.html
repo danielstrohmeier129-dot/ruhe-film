@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUHE — Kurzfilm</title>
+<meta name="description" content="RUHE — ein Kurzfilm. Premiere am 21.11.2026, 18:00 Uhr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0a08;
+    --bg-elevated: #16130f;
+    --text: #ded8cc;
+    --text-dim: #8f887a;
+    --light: #e3b563;
+    --light-dim: #7a5f33;
+    --wood: #4a3524;
+    --wood-dark: #2b2117;
+    --line: #2a251e;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  h1, h2, .display{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  a{ color: inherit; }
+
+  img{ max-width: 100%; display:block; }
+
+  /* ---------- HERO ---------- */
+
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .hero img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: 0.92;
+  }
+
+  .hero::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.15) 40%, rgba(6,5,4,0.75) 78%, rgba(6,5,4,0.97) 100%);
+  }
+
+  .hero-content{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 6vw 6vw;
+  }
+
+  .hero-title{
+    font-size: clamp(3.2rem, 13vw, 8.5rem);
+    line-height: 0.86;
+    color: #f2ede3;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+  }
+
+  .hero-tagline{
+    margin-top: 1.1rem;
+    max-width: 34ch;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .hero-scroll{
+    position: absolute;
+    bottom: 2rem;
+    right: 6vw;
+    z-index: 2;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+
+  section{
+    padding: 6rem 6vw;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-inner{
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  /* ---------- COUNTDOWN ---------- */
+
+  .countdown-section{
+    background: var(--bg-elevated);
+    text-align: center;
+  }
+
+  .countdown-frame{
+    position: relative;
+    padding: 3rem 1.5rem 3.5rem;
+    border: 1px solid var(--line);
+  }
+
+  .countdown-frame::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 8%; right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--light), transparent);
+    filter: blur(1px);
+  }
+
+  .countdown-date{
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .countdown-date strong{ color: var(--light); font-weight: 500; }
+
+  .countdown-grid{
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.8rem, 4vw, 3rem);
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit{ min-width: 68px; }
+
+  .countdown-number{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    color: var(--light);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-label{
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .countdown-sep{
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    color: var(--wood);
+    align-self: center;
+  }
+
+  .countdown-done{
+    font-family:'Oswald', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--light);
+  }
+
+  /* ---------- REMINDER ---------- */
+
+  .reminder{
+    margin-top: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .btn{
+    appearance: none;
+    border: 1px solid var(--light-dim);
+    background: transparent;
+    color: var(--light);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.95rem 2.2rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .btn:hover{
+    background: var(--light);
+    color: #16130f;
+  }
+
+  .btn:focus-visible{
+    outline: 2px solid var(--light);
+    outline-offset: 3px;
+  }
+
+  .reminder-note{
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    min-height: 1.2em;
+  }
+
+  /* ---------- SYNOPSIS ---------- */
+
+  .synopsis-section{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .synopsis-eyebrow{
+    color: var(--light-dim);
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .synopsis-title{
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 1.6rem;
+  }
+
+  .synopsis-text p{
+    max-width: 62ch;
+    color: var(--text);
+    font-size: 1.05rem;
+    margin: 0 0 1.1rem;
+  }
+
+  .synopsis-text p:last-child{ margin-bottom: 0; }
+
+  /* ---------- TRAILER ---------- */
+
+  .trailer-section{
+    background: var(--bg-elevated);
+  }
+
+  .trailer-title{
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 1.6rem;
+    text-align: center;
+  }
+
+  .trailer-frame{
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    background: #000 url('assets/ruhe-poster.png') center 25% / cover no-repeat;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .trailer-frame::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: rgba(6,5,4,0.45);
+  }
+
+  .trailer-plank{
+    position: absolute;
+    left: -6%;
+    width: 112%;
+    height: 14px;
+    background: linear-gradient(180deg, var(--wood) 0%, var(--wood-dark) 100%);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+  .trailer-plank.p1{ top: 18%; transform: rotate(-2.2deg); }
+  .trailer-plank.p2{ top: 46%; transform: rotate(1.6deg); }
+  .trailer-plank.p3{ top: 74%; transform: rotate(-1deg); }
+
+  .trailer-play{
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--light);
+  }
+
+  .trailer-play-icon{
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    border: 1.5px solid var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11,10,8,0.55);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .trailer-play:hover .trailer-play-icon{
+    background: rgba(227,181,99,0.15);
+    transform: scale(1.05);
+  }
+
+  .trailer-play-icon svg{ margin-left: 4px; }
+
+  .trailer-caption{
+    text-align: center;
+    margin-top: 1.1rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* real <video>, hidden until a src is provided */
+  .trailer-video{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    display: none;
+    background: #000;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    padding: 3rem 6vw;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+
+  footer .footer-title{
+    font-family: 'Oswald', sans-serif;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  @media (min-width: 760px){
+    .synopsis-section{
+      grid-template-columns: 220px 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <img src="assets/ruhe-poster.png" alt="Ein Mann sitzt im Dunkeln vor einer verbarrikadierten Zimmertür, durch deren Spalt Licht dringt.">
+    <div class="hero-content">
+      <h1 class="hero-title">RUHE</h1>
+      <p class="hero-tagline">Ein Kurzfilm.</p>
+    </div>
+    <div class="hero-scroll">↓ Premiere &amp; Trailer</div>
+  </section>
+
+  <section class="countdown-section" id="countdown">
+    <div class="section-inner">
+      <div class="countdown-frame">
+        <p class="countdown-date">Premiere am <strong>21. November 2026</strong> um <strong>18:00 Uhr</strong></p>
+
+        <div id="countdown-active">
+          <div class="countdown-grid">
+            <div class="countdown-unit">
+              <div class="countdown-number" id="cd-days">--</div>
+              <div class="countdown-label">Tage</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="cd-hours">--</div>
+              <div class="countdown-label">Stunden</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="cd-minutes">--</div>
+              <div class="countdown-label">Minuten</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="cd-seconds">--</div>
+              <div class="countdown-label">Sekunden</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="countdown-finished" style="display:none;">
+          <p class="countdown-done">RUHE ist da.</p>
+        </div>
+
+        <div class="reminder">
+          <button class="btn" id="remind-btn" type="button">Termin merken</button>
+          <p class="reminder-note" id="remind-note">Lädt einen Kalendereintrag (.ics) mit Erinnerung herunter — keine E-Mail, funktioniert direkt auf deinem Gerät.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="worum-gehts">
+    <div class="section-inner synopsis-section">
+      <div>
+        <p class="synopsis-eyebrow">Worum es geht</p>
+      </div>
+      <div class="synopsis-text">
+        <h2 class="synopsis-title">Er wollte nur seine Ruhe.</h2>
+        <p>Ein ganz normaler Tag, nur ein bisschen genervt von allem. Er sagt seinen Eltern, sie sollen ihn einfach in Ruhe lassen. Am nächsten Morgen will er los zur Arbeit — aber seine Zimmertür geht nicht mehr auf.</p>
+        <p>Zuerst fühlt es sich fast wie ein Glücksfall an: kein Job, keine Pflichten, endlich niemand, der etwas von ihm will. Doch aus Stunden werden Tage. Der Hunger wächst. Und irgendwann lässt sich nicht mehr unterscheiden, was in dem Zimmer wirklich da ist — und was nicht.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trailer-section" id="trailer">
+    <div class="section-inner">
+      <h2 class="trailer-title">Trailer</h2>
+      <div class="trailer-frame">
+        <div class="trailer-plank p1"></div>
+        <div class="trailer-plank p2"></div>
+        <div class="trailer-plank p3"></div>
+
+        <video class="trailer-video" id="trailer-video" controls playsinline poster="assets/ruhe-poster.png"></video>
+
+        <button class="trailer-play" id="trailer-play" type="button" aria-label="Trailer abspielen">
+          <span class="trailer-play-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 4L20 12L6 20V4Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <p class="trailer-caption" id="trailer-caption">Trailer folgt in Kürze.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-title">RUHE</div>
+    <div>Ein Kurzfilm — Premiere 21.11.2026</div>
+  </footer>
+
+<script>
+  // ---------- COUNTDOWN ----------
+  // Zieldatum: 21.11.2026, 18:00 Uhr (MEZ, UTC+1 — im November ist noch keine Sommerzeit aktiv)
+  const targetDate = new Date('2026-11-21T18:00:00+01:00');
+
+  const els = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    minutes: document.getElementById('cd-minutes'),
+    seconds: document.getElementById('cd-seconds'),
+  };
+  const activeBox = document.getElementById('countdown-active');
+  const finishedBox = document.getElementById('countdown-finished');
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+
+  function updateCountdown(){
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0){
+      activeBox.style.display = 'none';
+      finishedBox.style.display = 'block';
+      clearInterval(timer);
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    els.days.textContent = days;
+    els.hours.textContent = pad(hours);
+    els.minutes.textContent = pad(minutes);
+    els.seconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  const timer = setInterval(updateCountdown, 1000);
+
+  // ---------- REMINDER (.ics Kalenderdatei) ----------
+  function formatICSDate(date){
+    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  }
+
+  function downloadICS(){
+    const start = targetDate;
+    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000); // 2 Stunden Länge
+    const now = new Date();
+
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//RUHE//Premiere//DE',
+      'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'UID:ruhe-premiere-2026112118@ruhe-film',
+      'DTSTAMP:' + formatICSDate(now),
+      'DTSTART:' + formatICSDate(start),
+      'DTEND:' + formatICSDate(end),
+      'SUMMARY:RUHE — Premiere',
+      'DESCRIPTION:Die Premiere von RUHE beginnt jetzt.',
+      'BEGIN:VALARM',
+      'TRIGGER:-PT1H',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:RUHE beginnt in einer Stunde',
+      'END:VALARM',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ruhe-premiere.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  const remindBtn = document.getElementById('remind-btn');
+  const remindNote = document.getElementById('remind-note');
+
+  remindBtn.addEventListener('click', () => {
+    downloadICS();
+    remindNote.textContent = 'Kalendereintrag wurde heruntergeladen — einfach öffnen, um ihn zu übernehmen.';
+  });
+
+  // ---------- TRAILER ----------
+  // Sobald der Trailer fertig ist: Videodatei z. B. unter assets/trailer.mp4 ablegen
+  // und die folgende Zeile aktivieren:
+  // const TRAILER_SRC = 'assets/trailer.mp4';
+  const TRAILER_SRC = null;
+
+  const playBtn = document.getElementById('trailer-play');
+  const video = document.getElementById('trailer-video');
+  const caption = document.getElementById('trailer-caption');
+
+  playBtn.addEventListener('click', () => {
+    if (!TRAILER_SRC){
+      caption.textContent = 'Trailer noch nicht verfügbar — schau bald wieder vorbei.';
+      return;
+    }
+    video.src = TRAILER_SRC;
+    video.style.display = 'block';
+    playBtn.style.display = 'none';
+    video.play();
+  });
+</script>
+
+</body>
+</html>
