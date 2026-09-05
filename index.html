@@ -557,21 +557,11 @@
   });
   
  // ---------- TRAILER ----------
-const TRAILER_SRC = null;
-
 const playBtn = document.getElementById('trailer-play');
-const video = document.getElementById('trailer-video');
 const caption = document.getElementById('trailer-caption');
 
 playBtn.addEventListener('click', () => {
-  if (!TRAILER_SRC){
-    caption.textContent = 'Trailer noch nicht verfügbar — schau bald wieder vorbei.';
-    return;
-  }
-  video.src = TRAILER_SRC;
-  video.style.display = 'block';
-  playBtn.style.display = 'none';
-  video.play();
+  caption.textContent = 'Trailer noch nicht verfügbar — schau bald wieder vorbei.';
 });
 </script>
 
