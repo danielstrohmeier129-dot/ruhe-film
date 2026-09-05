@@ -556,26 +556,23 @@
     remindNote.textContent = 'Kalendereintrag wurde heruntergeladen — einfach öffnen, um ihn zu übernehmen.';
   });
 
-  // ---------- TRAILER ----------
-  // Sobald der Trailer fertig ist: Videodatei z. B. unter assets/trailer.mp4 ablegen
-  // und die folgende Zeile aktivieren:
-  // const TRAILER_SRC = 'assets/trailer.mp4';
-  const TRAILER_SRC = 'assets/trailer.mp4';
+ // ---------- TRAILER ----------
+const TRAILER_SRC = null;
 
-  const playBtn = document.getElementById('trailer-play');
-  const video = document.getElementById('trailer-video');
-  const caption = document.getElementById('trailer-caption');
+const playBtn = document.getElementById('trailer-play');
+const video = document.getElementById('trailer-video');
+const caption = document.getElementById('trailer-caption');
 
-  playBtn.addEventListener('click', () => {
-    if (!TRAILER_SRC){
-      caption.textContent = 'Trailer noch nicht verfügbar — schau bald wieder vorbei.';
-      return;
-    }
-    video.src = TRAILER_SRC;
-    video.style.display = 'block';
-    playBtn.style.display = 'none';
-    video.play();
-  });
+playBtn.addEventListener('click', () => {
+  if (!TRAILER_SRC){
+    caption.textContent = 'Trailer noch nicht verfügbar — schau bald wieder vorbei.';
+    return;
+  }
+  video.src = TRAILER_SRC;
+  video.style.display = 'block';
+  playBtn.style.display = 'none';
+  video.play();
+});
 </script>
 
 </body>
